@@ -1,14 +1,57 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { DataTable } from '@/components/admin/DataTable';
 import { participantColumns } from '@/components/admin/participantColumns';
 import { useParticipants } from '@/hooks/useParticipants';
 import { Button } from '@/components/ui/button';
+import { Participant } from '@/types/participant';
 
 export default function AdminPage() {
   const { participants, isLoading, error, mutate } = useParticipants();
+  const [selectedParticipants, setSelectedParticipants] = useState<Participant[]>([]);
+  const [isCreatingGame, setIsCreatingGame] = useState(false);
+
+  const handleStartGame = async () => {
+    if (selectedParticipants.length !== 3) {
+      alert('Selecione exatamente 3 participantes para iniciar o jogo');
+      return;
+    }
+
+    setIsCreatingGame(true);
+    try {
+      const response = await fetch('/api/games', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: `Jogo ${new Date().toLocaleString('pt-BR')}`,
+          maxParticipants: 3,
+          participantIds: selectedParticipants.map(p => p.id),
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Falha ao criar jogo');
+      }
+
+      const result = await response.json();
+      console.log('Jogo criado:', result);
+      
+      // Limpar seleção e atualizar lista
+      setSelectedParticipants([]);
+      mutate();
+      
+      alert(`Jogo "${result.game.name}" criado com sucesso!`);
+    } catch (error) {
+      console.error('Erro ao criar jogo:', error);
+      alert('Erro ao criar jogo. Tente novamente.');
+    } finally {
+      setIsCreatingGame(false);
+    }
+  };
 
   if (isLoading) {
     return (
@@ -87,10 +130,19 @@ export default function AdminPage() {
                 <Button 
                   className="totem-button"
                   variant="outline"
+                  onClick={handleStartGame}
+                  disabled={selectedParticipants.length !== 3 || isCreatingGame}
                 >
-                  🎯 Iniciar Novo Jogo
+                  {isCreatingGame ? '⏳ Criando...' : '🎯 Iniciar Jogo (3)'}
                 </Button>
               </div>
+              {selectedParticipants.length > 0 && (
+                <div className="mt-4 p-4 border-2 border-foreground shadow-brutal bg-muted">
+                  <p className="totem-text text-sm text-center">
+                    {selectedParticipants.length} participante(s) selecionado(s): {selectedParticipants.map(p => p.name).join(', ')}
+                  </p>
+                </div>
+              )}
             </div>
           </CardContent>
         </Card>
@@ -101,6 +153,7 @@ export default function AdminPage() {
           searchKey="name"
           searchPlaceholder="Buscar por nome..."
           title={`Participantes Cadastrados (${participants.length})`}
+          onSelectionChange={setSelectedParticipants}
         />
       </div>
     </div>

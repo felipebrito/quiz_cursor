@@ -482,7 +482,7 @@
         "dependencies": [
           7
         ],
-        "status": "pending",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -490,7 +490,7 @@
             "description": "Modify the participant data table component in the admin dashboard to include a checkbox in each row, allowing for participant selection. This will likely involve updating the column definitions for the `@tanstack/react-table` instance.",
             "dependencies": [],
             "details": "Locate the component responsible for rendering the participant list (e.g., `src/components/admin/participant-table.tsx`). Using the `@tanstack/react-table` documentation, add a new column definition for selection. This column should render a `Checkbox` component from `shadcn/ui`. Enable the `enableRowSelection` feature on the table instance.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Verify in the UI that a checkbox appears on each row of the participant table and in the table header for select-all functionality. Ensure clicking the checkboxes does not cause any console errors."
           },
           {
@@ -501,7 +501,7 @@
               "8.1"
             ],
             "details": "In the main admin page component (e.g., `src/app/admin/page.tsx`), use a React state hook (e.g., `useState`) to manage an object or array of selected row IDs. Pass the state and the state setter function to the participant table component to control the row selection feature implemented in the previous subtask.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Use React DevTools to inspect the component state. Confirm that as checkboxes are toggled in the UI, the corresponding participant IDs are correctly added to or removed from the state array."
           },
           {
@@ -512,7 +512,7 @@
               "8.2"
             ],
             "details": "Add a `Button` component from `shadcn/ui` to the admin page. Bind its `disabled` property to a condition that checks if the length of the selected participants state array is not equal to 3. This ensures the button is only clickable when the condition for starting a game is met.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Manually test the UI. The 'Start Game' button should be disabled by default. It should remain disabled when 1, 2, 4, or more participants are selected. Verify it becomes enabled only when exactly 3 participants are selected."
           },
           {
@@ -521,7 +521,7 @@
             "description": "Develop a new API route (`POST /api/game/start`) that accepts an array of three participant IDs. This endpoint will be responsible for initiating the game creation process.",
             "dependencies": [],
             "details": "Create a new Next.js API route file at `src/app/api/game/start/route.ts`. Implement a `POST` request handler that parses the incoming JSON body to extract an array of `participantIds`. Add validation to ensure the request body contains an array with exactly three string IDs. Return an appropriate error response if the validation fails.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Use a tool like Postman or `curl` to send POST requests to the `/api/game/start` endpoint. Test with invalid payloads (e.g., no body, incorrect data type, array with more or less than 3 IDs) and verify that it returns a 400 Bad Request status. Send a valid payload and expect a success response (e.g., 201 Created)."
           },
           {
@@ -533,7 +533,7 @@
               "8.4"
             ],
             "details": "In the `POST` handler for `/api/game/start`, use the `prisma.$transaction` API. The transaction should first create a new record in the `Game` table. Then, using the ID of the newly created game, create three new records in the `GameParticipant` table, one for each participant ID received in the request. On the client-side, wire the 'Start Game' button's `onClick` event to call this API endpoint, passing the selected participant IDs.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "After a successful API call from the UI or an API client, query the database directly or via a Prisma Client script. Verify that a new row exists in the `Game` table and that three new rows exist in the `GameParticipant` table, all correctly linked to the new game ID and the respective participant IDs."
           }
         ]
@@ -1015,7 +1015,7 @@
     ],
     "metadata": {
       "created": "2025-09-25T15:05:54.002Z",
-      "updated": "2025-09-25T20:36:29.057Z",
+      "updated": "2025-09-25T20:41:05.365Z",
       "description": "Tasks for master context"
     }
   }
