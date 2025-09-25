@@ -15,7 +15,6 @@ const WebcamCapture: React.FC<WebcamCaptureProps> = ({ onCapture, className = ''
   const [isCaptured, setIsCaptured] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [countdown, setCountdown] = useState<number | null>(null);
-  const [isFlipped, setIsFlipped] = useState(true);
   // Removido o estado mounted que estava causando problemas de hidratação
 
   // Reset quando resetTrigger mudar
@@ -85,13 +84,6 @@ const WebcamCapture: React.FC<WebcamCaptureProps> = ({ onCapture, className = ''
     setCountdown(null);
   }, []);
 
-  const toggleFlip = useCallback(() => {
-    console.log('Toggle flip chamado, estado atual:', isFlipped);
-    setIsFlipped(prev => {
-      console.log('Novo estado flip:', !prev);
-      return !prev;
-    });
-  }, [isFlipped]);
 
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -131,7 +123,7 @@ const WebcamCapture: React.FC<WebcamCaptureProps> = ({ onCapture, className = ''
   };
 
   // Renderizar diretamente sem verificação de mounted
-  console.log('📷 WebcamCapture renderizando...', { isCaptured, countdown, isFlipped });
+  console.log('📷 WebcamCapture renderizando...', { isCaptured, countdown });
 
   if (error) {
     return (
@@ -161,7 +153,7 @@ const WebcamCapture: React.FC<WebcamCaptureProps> = ({ onCapture, className = ''
                        onUserMediaError={handleUserMediaError}
                        className="h-full object-cover webcam-filter cursor-pointer"
                        style={{ 
-                         transform: isFlipped ? 'scaleX(-1)' : 'scaleX(1)',
+                         transform: 'scaleX(-1)',
                          width: '80%'
                        }}
                        onClick={handleClick}
@@ -186,15 +178,6 @@ const WebcamCapture: React.FC<WebcamCaptureProps> = ({ onCapture, className = ''
                 </div>
               )}
               
-              {/* Botão de flip */}
-              <button
-                onClick={toggleFlip}
-                className="absolute top-4 right-4 totem-button text-xl py-2 px-4"
-                style={{ backgroundColor: 'var(--secondary)', color: 'var(--secondary-foreground)', zIndex: 30 }}
-                title="Virar câmera"
-              >
-                🔄 FLIP
-              </button>
             </div>
             
             {/* Botão de captura com toque na tela */}
@@ -214,7 +197,7 @@ const WebcamCapture: React.FC<WebcamCaptureProps> = ({ onCapture, className = ''
                        alt="Selfie capturada"
                        className="object-cover webcam-filter"
                        style={{
-                         transform: isFlipped ? 'scaleX(-1)' : 'scaleX(1)',
+                         transform: 'scaleX(-1)',
                          width: '50%',
                          height: 'auto'
                        }}
@@ -227,15 +210,6 @@ const WebcamCapture: React.FC<WebcamCaptureProps> = ({ onCapture, className = ''
                 <div className="webcam-glitch"></div>
               </div>
 
-              {/* Botão de flip */}
-              <button
-                onClick={toggleFlip}
-                className="absolute top-4 right-4 totem-button text-xl py-2 px-4"
-                style={{ backgroundColor: 'var(--secondary)', color: 'var(--secondary-foreground)', zIndex: 30 }}
-                title="Virar câmera"
-              >
-                🔄 FLIP
-              </button>
             </div>
             
             <div className="flex gap-4">

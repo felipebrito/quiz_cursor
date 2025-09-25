@@ -73,7 +73,33 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit, onSuccess
   // Chama onSuccess quando o formulário é submetido com sucesso
   const handleSubmitWithSuccess = async (data: RegistrationFormData) => {
     try {
-      await onSubmit({ ...data, selfieImage });
+      // Criar FormData para envio de arquivo
+      const formData = new FormData();
+      formData.append('name', data.name);
+      if (data.email) formData.append('email', data.email);
+      if (data.phone) formData.append('phone', data.phone);
+      
+      // Converter base64 para File se selfie existir
+      if (selfieImage) {
+        const response = await fetch(selfieImage);
+        const blob = await response.blob();
+        const file = new File([blob], 'selfie.jpg', { type: 'image/jpeg' });
+        formData.append('selfie', file);
+      }
+      
+      // Enviar dados para API
+      const response = await fetch('/api/participants', {
+        method: 'POST',
+        body: formData,
+      });
+      
+      if (!response.ok) {
+        throw new Error('Falha ao cadastrar participante');
+      }
+      
+      const result = await response.json();
+      console.log('Participante cadastrado:', result);
+      
       // Se chegou até aqui, o cadastro foi bem-sucedido
       if (onSuccess) {
         onSuccess();
