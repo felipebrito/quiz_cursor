@@ -1,0 +1,133 @@
+{
+	"meta": {
+		"generatedAt": "2025-09-25T15:07:31.594Z",
+		"tasksAnalyzed": 15,
+		"totalTasks": 15,
+		"analysisCount": 15,
+		"thresholdScore": 5,
+		"projectName": "Taskmaster",
+		"usedResearch": true
+	},
+	"complexityAnalysis": [
+		{
+			"taskId": 1,
+			"taskTitle": "Initialize Next.js Project with TypeScript and Tailwind CSS",
+			"complexityScore": 2,
+			"recommendedSubtasks": 3,
+			"expansionPrompt": "Expand the task for initializing the Next.js project. Create subtasks for: 1. Running the `create-next-app` command with the specified flags. 2. Configuring `tailwind.config.ts` to include the dark mode strategy, primary fonts, and a basic color palette for the brutalist theme. 3. Updating `globals.css` to import the fonts and apply base styles to the body.",
+			"reasoning": "Codebase analysis confirms the project is empty. This task is low complexity as it primarily involves running a standard, well-documented CLI command (`create-next-app`) and making minor adjustments to configuration files. It's a foundational but straightforward setup process with no existing code to consider."
+		},
+		{
+			"taskId": 2,
+			"taskTitle": "Configure Prisma ORM with SQLite and Define Data Models",
+			"complexityScore": 4,
+			"recommendedSubtasks": 4,
+			"expansionPrompt": "Expand the Prisma ORM setup task. Create subtasks for: 1. Installing the Prisma CLI and client packages. 2. Initializing Prisma with the SQLite provider. 3. Defining all five models (Participant, Game, GameParticipant, Question, Answer) and their relationships in `prisma/schema.prisma`. 4. Generating the initial migration and the Prisma Client.",
+			"reasoning": "Codebase analysis shows no Prisma files exist. The complexity is medium-low. While the Prisma commands are simple, the core of this task is data modeling. Defining five related models (Participant, Game, GameParticipant, Question, Answer) requires careful thought to establish correct relationships and constraints, which elevates it beyond a simple setup."
+		},
+		{
+			"taskId": 3,
+			"taskTitle": "Integrate shadcn/ui and Create Base Layout",
+			"complexityScore": 2,
+			"recommendedSubtasks": 3,
+			"expansionPrompt": "Expand the task for integrating shadcn/ui. Create subtasks for: 1. Running the `shadcn-ui` CLI to initialize the library and its dependencies. 2. Creating a reusable `MainLayout.tsx` component in `components/layout/` that defines the main page structure. 3. Creating a test page that uses the `MainLayout` and renders a `Button` and `Card` to verify the integration is successful.",
+			"reasoning": "Codebase analysis confirms no `components` directory or `shadcn` configuration exists. This is a low-complexity task. The `shadcn-ui` CLI automates the entire setup process. Creating a basic layout component is a standard, non-complex React task."
+		},
+		{
+			"taskId": 4,
+			"taskTitle": "Develop Totem UI for Participant Registration",
+			"complexityScore": 3,
+			"recommendedSubtasks": 3,
+			"expansionPrompt": "Expand the Totem UI development task. Create subtasks for: 1. Creating the new page route at `app/totem/register/page.tsx`. 2. Building the registration form using `shadcn/ui` components (`Input`, `Label`, `Button`) and React Hook Form for state management. 3. Applying specific styling to ensure the form elements are large, high-contrast, and easily tappable for a totem interface.",
+			"reasoning": "Codebase analysis shows no `/totem` route exists. This is a standard frontend form-building task. Complexity is low because it leverages the pre-built `shadcn/ui` components (Task 3). The main effort is in composing these components and styling them for a specific touch-friendly use case, not in building them from scratch."
+		},
+		{
+			"taskId": 5,
+			"taskTitle": "Implement Webcam Capture for Participant Selfie",
+			"complexityScore": 5,
+			"recommendedSubtasks": 4,
+			"expansionPrompt": "Expand the webcam capture task. Create subtasks for: 1. Installing and integrating the `react-webcam` library into the registration form. 2. Implementing the UI controls for 'Take Picture' and 'Retake Picture', including logic to switch between the live feed and the captured image preview. 3. Storing the captured image data (as a base64 string or Blob) in the form's state. 4. Implementing user feedback for camera permission requests and error states (e.g., camera not found, access denied).",
+			"reasoning": "Codebase analysis confirms no webcam-related code exists. This task has medium complexity. It involves integrating a third-party library and interacting with browser hardware APIs (WebRTC), which brings challenges like handling user permissions, cross-browser compatibility, and managing different states (loading, live, captured, error)."
+		},
+		{
+			"taskId": 6,
+			"taskTitle": "Create API Endpoint for Participant Creation",
+			"complexityScore": 6,
+			"recommendedSubtasks": 5,
+			"expansionPrompt": "Expand the participant creation API endpoint task. Create subtasks for: 1. Setting up the `POST` API route handler at `app/api/participants/route.ts`. 2. Implementing logic to parse `multipart/form-data` from the incoming request. 3. Handling the file upload, including generating a unique filename and saving the image to the `/public/uploads` directory. 4. Validating the incoming text data (name, city, state). 5. Using the Prisma Client to create the new `Participant` record in the database with the form data and image path.",
+			"reasoning": "Codebase analysis shows no API routes exist yet. This task has medium complexity as it's the first full-stack feature connecting a form to the database. Handling `multipart/form-data` and file uploads is inherently more complex than handling JSON payloads. It requires server-side validation, file system interaction, and a database write operation, all within a single request."
+		},
+		{
+			"taskId": 7,
+			"taskTitle": "Develop Admin Dashboard for Participant Queue",
+			"complexityScore": 4,
+			"recommendedSubtasks": 4,
+			"expansionPrompt": "Expand the Admin Dashboard queue task. Create subtasks for: 1. Creating the admin page at `app/admin/page.tsx`. 2. Building an API route (`GET /api/participants`) to fetch all participants with `status: 'eligible'`. 3. Using the `shadcn/ui` `Table` component to display the participant queue, including their photo and details. 4. Integrating a data-fetching library like SWR or React Query to handle fetching and provide automatic refreshing of the queue.",
+			"reasoning": "Codebase analysis confirms no `/admin` page exists. The complexity is medium-low. The task involves standard frontend data fetching and display. Using `shadcn/ui`'s `Table` component simplifies the UI work, and a library like SWR simplifies the data-fetching and polling logic, but it still requires setting up the end-to-end data flow from the database to the UI."
+		},
+		{
+			"taskId": 8,
+			"taskTitle": "Implement Game Management in Admin Dashboard",
+			"complexityScore": 5,
+			"recommendedSubtasks": 4,
+			"expansionPrompt": "Expand the game management task. Create subtasks for: 1. Modifying the admin participant table to include checkboxes for selection. 2. Implementing client-side state management to track the array of selected participant IDs. 3. Creating a 'Start Game' button and implementing UI logic to enable it only when exactly 3 participants are selected. 4. Building a new API endpoint (`POST /api/games`) that accepts the three participant IDs, creates a new `Game` record, and creates the associated `GameParticipant` records.",
+			"reasoning": "Codebase analysis shows the admin page will be basic. This task adds significant interactive logic. The complexity is medium, involving both frontend state management (tracking selections) and a new, more complex backend endpoint that performs multiple related database writes (creating a Game and its GameParticipants), which should ideally be handled in a transaction."
+		},
+		{
+			"taskId": 9,
+			"taskTitle": "Set Up Socket.IO Server for Real-time Communication",
+			"complexityScore": 6,
+			"recommendedSubtasks": 4,
+			"expansionPrompt": "Expand the Socket.IO server setup. Create subtasks for: 1. Installing `socket.io` and `socket.io-client`. 2. Creating a custom server entry point or a dedicated API route (`pages/api/socket.ts`) to initialize the Socket.IO server and attach it to the Next.js HTTP instance. 3. Defining a global singleton or a similar pattern to manage the server instance. 4. Creating a client-side hook (`useSocket`) to establish and manage the socket connection within React components.",
+			"reasoning": "Codebase analysis confirms no real-time infrastructure exists. This task has medium complexity because integrating Socket.IO with Next.js's serverless architecture is non-trivial. It requires a specific setup pattern to correctly instantiate and reuse the WebSocket server instance across different serverless function invocations, which is a known but complex configuration."
+		},
+		{
+			"taskId": 10,
+			"taskTitle": "Develop Backend Game State Machine and Logic",
+			"complexityScore": 9,
+			"recommendedSubtasks": 5,
+			"expansionPrompt": "Expand the backend game logic task. Create subtasks for: 1. Designing and implementing a `GameManager` class or module to encapsulate the state and logic for a single game instance. 2. Implementing the core state machine with states like `WAITING`, `ROUND_IN_PROGRESS`, `ROUND_ENDED`, `GAME_OVER`. 3. Developing the logic for round progression, question selection (initially from a hardcoded list), and answer timing. 4. Creating the scoring algorithm based on correctness and response time. 5. Integrating the state machine with Socket.IO to listen for a 'start game' trigger and emit game state updates.",
+			"reasoning": "Codebase analysis shows no game logic exists. This is the most complex backend task. It's not about CRUD operations but about designing and implementing a complex, time-sensitive, stateful process. The state machine must manage timers, orchestrate events for multiple users, calculate scores in real-time, and be robust against errors. This is pure algorithmic and architectural design."
+		},
+		{
+			"taskId": 11,
+			"taskTitle": "Create Player Game Screen UI",
+			"complexityScore": 4,
+			"recommendedSubtasks": 3,
+			"expansionPrompt": "Expand the Player Game Screen UI task. Create subtasks for: 1. Setting up the dynamic route `app/game/[gameId]/page.tsx`. 2. Designing the static UI layout, including a section for the player's avatar and name, a central area for the question, and three large, distinct answer buttons (A, B, C). 3. Structuring the component to be driven by data from an external source (i.e., preparing it to receive props or context from the Socket.IO connection).",
+			"reasoning": "Codebase analysis confirms this page does not exist. The complexity is medium-low. The UI layout itself is relatively simple. The complexity comes from designing it as a reactive component that will be entirely controlled by real-time events (from Task 12), rather than a traditional page that fetches data on load. The focus is on creating a clean structure ready for real-time data injection."
+		},
+		{
+			"taskId": 12,
+			"taskTitle": "Implement Real-time Game Event Synchronization",
+			"complexityScore": 8,
+			"recommendedSubtasks": 4,
+			"expansionPrompt": "Expand the real-time synchronization task. Create subtasks for: 1. Defining a strict event contract/schema for all game-related Socket.IO events (e.g., `server:new-question`, `client:submit-answer`, `server:round-results`). 2. Implementing the server-side emitters within the Game State Machine (Task 10) to broadcast events at key state transitions. 3. Implementing the client-side listeners on the Player Game Screen (Task 11) to update the UI in response to server events. 4. Implementing listeners on the Public Display and Admin screens to ensure they also reflect the live game state.",
+			"reasoning": "Codebase analysis shows the frontend and backend are disconnected. This task is highly complex as it forms the nervous system of the application. It requires meticulous coordination between the server and multiple types of clients. Debugging synchronization issues, race conditions, and ensuring all clients have a consistent view of the game state is a significant engineering challenge."
+		},
+		{
+			"taskId": 13,
+			"taskTitle": "Enable Answer Submission and Real-time Scoring",
+			"complexityScore": 8,
+			"recommendedSubtasks": 4,
+			"expansionPrompt": "Expand the answer submission and scoring task. Create subtasks for: 1. Implementing the client-side logic on the Player Game Screen to emit an `answer:submit` event with the answer payload when a button is clicked. 2. Creating the server-side listener for `answer:submit` within the game logic. 3. Implementing the core scoring logic on the server, which validates the answer, records the response time, calculates points, and updates the `Answer` and `GameParticipant` models in the database. 4. Broadcasting the results (e.g., who answered, updated scores) back to all clients via a `round:update` event.",
+			"reasoning": "Codebase analysis shows this core gameplay loop is missing. This task is highly complex because it represents a full, time-critical, real-time round trip. It involves a client action triggering a server-side database transaction and a subsequent broadcast to all clients. The logic must be fast, reliable, and correctly handle the 'fastest finger first' scoring dynamic, making it a critical and difficult piece of the application."
+		},
+		{
+			"taskId": 14,
+			"taskTitle": "Build Public Display Screen with Idle Mode Ranking",
+			"complexityScore": 5,
+			"recommendedSubtasks": 4,
+			"expansionPrompt": "Expand the Public Display Screen task. Create subtasks for: 1. Creating the page at `app/display/page.tsx` and connecting it to the Socket.IO server. 2. Developing the 'live game' view that subscribes to and visualizes game events for an audience. 3. Designing and implementing the 'idle mode' view, which displays a leaderboard of top players. 4. Creating a new API endpoint and the corresponding client-side fetching logic to retrieve and display the all-time ranking data for the idle mode.",
+			"reasoning": "Codebase analysis confirms this page does not exist. The complexity is medium. It requires building a new frontend view that, like the admin panel, has two distinct modes: a real-time listener and a standard data-fetching display. Managing the transition between these two states and implementing the data aggregation for the leaderboard adds a layer of complexity beyond a simple display."
+		},
+		{
+			"taskId": 15,
+			"taskTitle": "Apply Dark Brutalist Theme and Basic Framer Motion Animations",
+			"complexityScore": 4,
+			"recommendedSubtasks": 4,
+			"expansionPrompt": "Expand the theming and animation task. Create subtasks for: 1. Finalizing the dark brutalist theme in `tailwind.config.ts` by defining a specific color palette, typography, and border styles. 2. Auditing and refactoring all existing pages and components to ensure consistent application of the theme. 3. Integrating the `framer-motion` library into the project. 4. Applying targeted animations, such as page transitions with `AnimatePresence` and visual feedback on answer buttons using `whileTap` or variants.",
+			"reasoning": "Codebase analysis shows only a default Tailwind setup will exist. The complexity is medium-low. While not algorithmically complex, implementing a specific, stylized theme like brutalism consistently across an entire application is time-consuming and requires a good design eye. Integrating a new library like Framer Motion and applying animations tastefully adds another layer of work that touches many parts of the frontend."
+		}
+	]
+}

@@ -1,0 +1,136 @@
+PRD — Quiz Show Interativo
+
+Versão: 1.0
+Data: 25/09/2025
+Responsável: Felipe Brito / Aparato Design
+
+⸻
+
+1. Visão Geral
+
+Um jogo interativo de perguntas e respostas em estilo programa de TV.
+Participantes se cadastram em um totem de autoatendimento (com captura de foto). Uma recepcionista gerencia quem entra na fila, pode editar ou excluir participantes, e define os 3 jogadores ativos de cada partida.
+
+A cada partida (8 rodadas), perguntas com alternativas A/B/C são exibidas. O jogo calcula quem respondeu primeiro corretamente. Ao final, o campeão é anunciado com efeitos visuais e sonoros. Após isso, o sistema retorna ao Idle Mode (ranking + próximos jogadores).
+
+⸻
+
+2. Objetivos do Produto
+	•	Proporcionar experiência imersiva estilo TV Quiz com até 3 jogadores simultâneos.
+	•	Simplificar triagem de participantes pela recepcionista.
+	•	Automatizar a condução da partida (sem depender da recepcionista no meio do jogo).
+	•	Garantir sincronização justa de tempo e de registro de respostas.
+	•	Criar ambiente visual impactante (tema Brutalist Dark com shadcn/ui + sons/animações).
+
+⸻
+
+3. Usuários e Papéis
+	•	Participante (Jogador):
+	•	Cadastra-se no Totem.
+	•	Responde perguntas usando botões A, B, C (teclas mapeadas).
+	•	Recepcionista (Admin):
+	•	Visualiza fila de cadastros.
+	•	Pode editar dados ou excluir participantes do banco.
+	•	Seleciona 3 jogadores por partida.
+	•	Inicia a partida (única ação manual).
+	•	Público:
+	•	Assiste ao display com abertura, perguntas, resultados, placar, animações finais e ranking.
+
+⸻
+
+4. Fluxo do Sistema
+	1.	Idle Mode
+	•	Exibe logo, ranking e próximos jogadores.
+	2.	Cadastro no Totem
+	•	Webcam → selfie.
+	•	Preenche Nome / Cidade / Estado.
+	•	Salva no banco (status: APTO).
+	3.	Recepcionista
+	•	Gerencia fila de aptos.
+	•	Pode editar, excluir participantes.
+	•	Seleciona 3 jogadores → define posições 1, 2, 3.
+	•	Inicia partida.
+	4.	Partida (Automática)
+	•	Abertura (vinheta/logo).
+	•	8 rodadas:
+	•	Tela “Rodada X”.
+	•	Pergunta exibida + contagem regressiva sincronizada.
+	•	Estado “VALENDO”: habilita botões A/B/C.
+	•	Servidor processa resposta mais rápida correta.
+	•	Tela Resultado (mostra correta + quem pontuou).
+	•	Tela Final → animação com campeão + confetes/sons.
+	5.	Retorno ao Idle Mode
+	•	Atualiza ranking.
+	•	Exibe próximos jogadores.
+
+⸻
+
+5. Funcionalidades Essenciais (MCP)
+
+5.1 Totem
+	•	Captura selfie via webcam.
+	•	Formulário de cadastro (Nome, Cidade, Estado).
+	•	Registro no banco.
+	•	Mensagem de confirmação.
+
+5.2 Recepcionista
+	•	Dashboard com:
+	•	Lista de participantes aptos.
+	•	Botões para editar/excluir participantes.
+	•	Seleção de 3 jogadores por partida.
+	•	Botão Iniciar Partida.
+
+5.3 Jogo (Automatizado)
+	•	Fluxo automático das rodadas após iniciar.
+	•	Cada jogador tem 3 botões (A/B/C) → 9 entradas totais.
+	•	Servidor controla sincronização do contador.
+	•	Processamento de primeiro acerto válido.
+	•	Animações e sons entre telas.
+
+5.4 Ranking
+	•	Pontuação acumulada por participante.
+	•	Exibição no Idle Mode.
+	•	Destaque para campeão de cada partida.
+
+⸻
+
+6. Regras de Negócio
+	•	Cada jogador só pode enviar 1 resposta por rodada.
+	•	Em caso de empate no tempo, o servidor considera a primeira requisição recebida.
+	•	Se o jogador erra, pode-se configurar:
+	•	(a) não pontua e segue a rodada
+	•	(b) bloqueado de responder novamente (definir no backlog).
+	•	Após 8 rodadas, vencedor = maior pontuação.
+	•	Recepcionista só interfere antes (triagem, iniciar jogo).
+
+⸻
+
+7. Requisitos Técnicos
+	•	Front: Next.js + TypeScript + shadcn/ui (tema dark brutalist).
+	•	Realtime: Socket.IO para sincronização.
+	•	DB: Prisma ORM + SQLite/Postgres.
+	•	Hardware:
+	•	Totem com webcam.
+	•	Joysticks ou teclas mapeadas (A/B/C → 9 entradas).
+	•	Display grande (público).
+	•	Efeitos: Framer Motion + áudio SFX.
+
+⸻
+
+8. Critérios de Aceitação
+	•	✅ Cadastro no Totem salva dados + foto.
+	•	✅ Recepcionista pode editar/excluir participantes.
+	•	✅ Partida inicia automaticamente após botão “Iniciar”.
+	•	✅ Telas seguem fluxo automático (sem controle manual durante).
+	•	✅ Perguntas e respostas sincronizadas para todos os jogadores.
+	•	✅ Primeiro acerto é processado corretamente.
+	•	✅ Campeão exibido com animação final.
+	•	✅ Idle Mode exibe ranking atualizado + próximos.
+
+⸻
+
+9. Backlog Futuro (não MCP)
+	•	Integração com APIs externas de perguntas.
+	•	Estatísticas detalhadas de jogadores.
+	•	Suporte a mais de 3 jogadores.
+	•	Customização de temas visuais.
