@@ -1,33 +1,36 @@
-@import "tailwindcss";
+/* Import Google Fonts - MUST be first */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&display=swap');
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Brutalist Dark Theme - Fixed */
 :root {
-  /* Light mode colors */
-  --background: #ffffff;
-  --foreground: #0d1117;
-  --card: #ffffff;
-  --card-foreground: #0d1117;
-  --popover: #ffffff;
-  --popover-foreground: #0d1117;
-  --primary: #0d1117;
-  --primary-foreground: #ffffff;
-  --secondary: #f1f5f9;
-  --secondary-foreground: #0d1117;
-  --muted: #f1f5f9;
-  --muted-foreground: #64748b;
-  --accent: #f1f5f9;
-  --accent-foreground: #0d1117;
-  --destructive: #ef4444;
-  --destructive-foreground: #ffffff;
-  --border: #e2e8f0;
-  --input: #e2e8f0;
-  --ring: #0d1117;
+  --background: #0d1117;
+  --foreground: #f0f6fc;
+  --card: #161b22;
+  --card-foreground: #f0f6fc;
+  --popover: #161b22;
+  --popover-foreground: #f0f6fc;
+  --primary: #f0f6fc;
+  --primary-foreground: #0d1117;
+  --secondary: #21262d;
+  --secondary-foreground: #f0f6fc;
+  --muted: #21262d;
+  --muted-foreground: #8b949e;
+  --accent: #21262d;
+  --accent-foreground: #f0f6fc;
+  --destructive: #f85149;
+  --destructive-foreground: #f0f6fc;
+  --border: #30363d;
+  --input: #30363d;
+  --ring: #f0f6fc;
   --radius: 0.5rem;
 }
 
 .dark {
-  /* Dark mode colors - Brutalist theme */
   --background: #0d1117;
   --foreground: #f0f6fc;
   --card: #161b22;
@@ -49,82 +52,347 @@
   --ring: #f0f6fc;
 }
 
-* {
-  border-color: hsl(var(--border));
+/* Basic styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: var(--background);
+  color: var(--foreground);
 }
 
-body {
-  @apply bg-background text-foreground font-body;
-  font-feature-settings: "rlig" 1, "calt" 1;
+/* Test styles to make sure CSS is working */
+.test-visible {
+  background-color: #f0f0f0;
+  border: 2px solid #333;
+  padding: 20px;
+  margin: 20px;
+  color: #333;
 }
 
 /* Brutalist utility classes */
 .brutal-border {
-  @apply border-2 border-foreground;
+  border: 2px solid var(--foreground);
 }
 
 .brutal-shadow {
-  @apply shadow-brutal;
+  box-shadow: 8px 8px 0px 0px var(--foreground);
 }
 
 .brutal-button {
-  @apply px-6 py-3 font-bold text-lg border-2 border-foreground shadow-brutal-sm hover:shadow-brutal transition-all duration-200 active:translate-x-1 active:translate-y-1 active:shadow-none;
+  padding: 12px 24px;
+  font-weight: bold;
+  font-size: 18px;
+  border: 2px solid var(--foreground);
+  box-shadow: 4px 4px 0px 0px var(--foreground);
+  background-color: var(--background);
+  color: var(--foreground);
+  cursor: pointer;
+  transition: all 0.2s;
+  border-radius: var(--radius);
+}
+
+.brutal-button:hover {
+  box-shadow: 8px 8px 0px 0px var(--foreground);
+}
+
+.brutal-button:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px 0px var(--foreground);
 }
 
 .brutal-card {
-  @apply p-6 border-2 border-foreground shadow-brutal bg-card;
+  padding: 24px;
+  border: 2px solid var(--foreground);
+  box-shadow: 8px 8px 0px 0px var(--foreground);
+  background-color: var(--card);
+  color: var(--card-foreground);
+  border-radius: var(--radius);
 }
 
 .brutal-input {
-  @apply px-4 py-2 border-2 border-foreground shadow-brutal-sm focus:shadow-brutal focus:outline-none bg-background text-foreground;
+  padding: 8px 16px;
+  border: 2px solid var(--foreground);
+  box-shadow: 4px 4px 0px 0px var(--foreground);
+  background-color: var(--background);
+  color: var(--foreground);
+  border-radius: var(--radius);
 }
 
-/* Game-specific styles */
+.brutal-input:focus {
+  outline: none;
+  box-shadow: 8px 8px 0px 0px var(--foreground);
+}
+
+/* Game-specific styles - FIXED */
 .game-button {
-  @apply px-8 py-4 text-2xl font-bold border-4 border-foreground shadow-brutal hover:shadow-brutal-lg transition-all duration-200 active:translate-x-2 active:translate-y-2 active:shadow-none;
+  padding: 16px 32px;
+  font-size: 24px;
+  font-weight: bold;
+  border: 4px solid var(--foreground);
+  box-shadow: 8px 8px 0px 0px var(--foreground);
+  cursor: pointer;
+  transition: all 0.2s;
+  border-radius: var(--radius);
+  display: inline-block;
+  text-align: center;
+  min-width: 60px;
+}
+
+.game-button:hover {
+  box-shadow: 12px 12px 0px 0px var(--foreground);
+}
+
+.game-button:active {
+  transform: translate(4px, 4px);
+  box-shadow: 4px 4px 0px 0px var(--foreground);
 }
 
 .game-button-a {
-  @apply bg-red-500 hover:bg-red-600 text-white;
+  background-color: #ef4444;
+  color: white;
 }
 
 .game-button-b {
-  @apply bg-blue-500 hover:bg-blue-600 text-white;
+  background-color: #3b82f6;
+  color: white;
 }
 
 .game-button-c {
-  @apply bg-green-500 hover:bg-green-600 text-white;
+  background-color: #22c55e;
+  color: white;
 }
 
-/* Animations */
-@keyframes slideIn {
-  from {
+/* Retro Arcade Color Palette */
+.retro-primary {
+  background-color: #ff6b9d;
+  color: white;
+}
+
+.retro-secondary {
+  background-color: #4ecdc4;
+  color: white;
+}
+
+.retro-accent {
+  background-color: #ffa726;
+  color: white;
+}
+
+.retro-destructive {
+  background-color: #ef4444;
+  color: white;
+}
+
+/* Totem-specific touch-friendly styles */
+.totem-button {
+  padding: 32px 48px;
+  font-size: 30px;
+  font-weight: bold;
+  border: 4px solid var(--foreground);
+  box-shadow: 8px 8px 0px 0px var(--foreground);
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+  cursor: pointer;
+  transition: all 0.2s;
+  border-radius: var(--radius);
+  min-height: 80px;
+  min-width: 200px;
+}
+
+.totem-button:hover {
+  box-shadow: 12px 12px 0px 0px var(--foreground);
+}
+
+.totem-button:active {
+  transform: translate(4px, 4px);
+  box-shadow: 4px 4px 0px 0px var(--foreground);
+}
+
+.totem-input {
+  padding: 24px;
+  font-size: 24px;
+  border: 4px solid var(--foreground);
+  box-shadow: 4px 4px 0px 0px var(--foreground);
+  background-color: var(--background);
+  color: var(--foreground);
+  min-height: 60px;
+}
+
+.totem-input:focus {
+  box-shadow: 8px 8px 0px 0px var(--foreground);
+  outline: none;
+}
+
+.totem-card {
+  padding: 32px;
+  border: 4px solid var(--foreground);
+  box-shadow: 8px 8px 0px 0px var(--foreground);
+  background-color: var(--card);
+  color: var(--card-foreground);
+  min-height: 400px;
+}
+
+.totem-title {
+  font-size: 48px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 32px;
+  font-family: var(--font-display);
+}
+
+.totem-subtitle {
+  font-size: 36px;
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.totem-text {
+  font-size: 24px;
+}
+
+.totem-label {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.totem-error {
+  font-size: 20px;
+  color: var(--destructive);
+  font-weight: bold;
+}
+
+/* Webcam visual effects */
+.webcam-filter {
+  filter: contrast(1.1) brightness(0.9) saturate(1.2);
+  position: relative;
+}
+
+.webcam-noise {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.02) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.02) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(255, 255, 255, 0.02) 0%, transparent 50%);
+  animation: noise 0.1s infinite;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+.webcam-scanlines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 255, 0, 0.03) 2px,
+    rgba(0, 255, 0, 0.03) 4px
+  );
+  animation: scanlines 0.1s linear infinite;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+.webcam-glitch {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 0, 255, 0.1) 25%,
+    transparent 50%,
+    rgba(0, 255, 255, 0.1) 75%,
+    transparent 100%
+  );
+  animation: glitch 2s infinite;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+@keyframes noise {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+@keyframes scanlines {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(4px); }
+}
+
+@keyframes glitch {
+  0%, 90%, 100% { 
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateX(0);
   }
-  to {
+  10% { 
+    opacity: 0.8;
+    transform: translateX(-2px);
+  }
+  20% { 
+    opacity: 0.6;
+    transform: translateX(2px);
+  }
+  30% { 
+    opacity: 0.4;
+    transform: translateX(-1px);
+  }
+  40% { 
+    opacity: 0.2;
+    transform: translateX(1px);
+  }
+  50% { 
+    opacity: 0;
+    transform: translateX(0);
+  }
+}
+
+/* Override w-full to be 80% */
+.w-full {
+  width: 80% !important;
+}
+
+/* Countdown animation */
+@keyframes countdown-pulse {
+  0%, 100% {
+    transform: scale(1);
     opacity: 1;
-    transform: translateY(0);
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 0.9;
   }
 }
 
-.animate-slide-in {
-  animation: slideIn 0.5s ease-out;
+@keyframes countdown-flash {
+  0%, 100% {
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+  50% {
+    background-color: rgba(0, 0, 0, 0.9);
+  }
 }
 
-/* Scrollbar styling */
-::-webkit-scrollbar {
-  width: 8px;
+.countdown-number {
+  animation: countdown-pulse 0.6s ease-in-out;
+  text-shadow: 
+    0 0 30px rgba(255, 255, 255, 1),
+    0 0 60px rgba(255, 255, 255, 0.8),
+    0 0 90px rgba(255, 255, 255, 0.6);
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.1em;
 }
 
-::-webkit-scrollbar-track {
-  @apply bg-muted;
-}
-
-::-webkit-scrollbar-thumb {
-  @apply bg-muted-foreground rounded-full;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  @apply bg-foreground;
+.countdown-overlay {
+  animation: countdown-flash 0.6s ease-in-out;
 }

@@ -77,7 +77,7 @@
         "dependencies": [
           1
         ],
-        "status": "pending",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -85,7 +85,7 @@
             "description": "Add Prisma as a development dependency and run the init command to create the initial Prisma configuration files, setting SQLite as the data source.",
             "dependencies": [],
             "details": "Run `npm install prisma --save-dev`. Then, execute `npx prisma init --datasource-provider sqlite` to generate the `prisma` directory and the `schema.prisma` file. Ensure the `.env` file is updated with `DATABASE_URL=\"file:./dev.db\"`.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Verify that the `prisma` directory, `prisma/schema.prisma`, and `.env` files are created and correctly configured."
           },
           {
@@ -96,7 +96,7 @@
               "2.1"
             ],
             "details": "In `prisma/schema.prisma`, define the `Participant` model (id, name, selfieUrl), the `Game` model (id, code, status, createdAt), and the `Question` model (id, text, options, correctAnswerIndex, imageUrl). Ensure appropriate data types are used for each field.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Review the schema file to ensure all required fields and types for the core models are present and correctly defined as per the project requirements."
           },
           {
@@ -107,7 +107,7 @@
               "2.2"
             ],
             "details": "In `prisma/schema.prisma`, create the `GameParticipant` model to link `Game` and `Participant`, including a score field. Create the `Answer` model to link a `Question` and a `GameParticipant`. Add the necessary `@relation` attributes to all models to define their relationships (e.g., one-to-many, many-to-many).",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Run `npx prisma validate` to check for syntax errors and ensure all relations are correctly defined without ambiguity."
           },
           {
@@ -118,7 +118,7 @@
               "2.3"
             ],
             "details": "Run the command `npx prisma migrate dev --name init`. This will create the SQLite database file (`dev.db`), create a new migration file in `prisma/migrations`, apply the schema to the database, and generate the type-safe Prisma Client in `node_modules/@prisma/client`.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Confirm that the `prisma/migrations` directory contains a new folder with the `migration.sql` file. Check for the existence of the `dev.db` file. The command should complete without errors."
           },
           {
@@ -129,7 +129,7 @@
               "2.4"
             ],
             "details": "Create a file at `lib/prisma.ts` that instantiates and exports a single Prisma Client instance, preventing multiple connections in a serverless environment. Create a temporary test script (e.g., `scripts/test-db.ts`) that imports the client, creates a new participant, reads it back, and then deletes it to confirm the entire setup is functional.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Execute the test script (e.g., `npx ts-node scripts/test-db.ts`) and verify that it runs without errors and logs the created participant's data to the console."
           }
         ]
@@ -144,7 +144,7 @@
         "dependencies": [
           1
         ],
-        "status": "pending",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -152,7 +152,7 @@
             "description": "Run the shadcn-ui init command to set up the necessary configuration files and dependencies. This will create `components.json` and modify `tailwind.config.ts` and `globals.css`.",
             "dependencies": [],
             "details": "Execute `npx shadcn-ui@latest init` in the project root. When prompted, confirm the use of TypeScript, select the 'Default' style, and use the existing `tailwind.config.ts` and `src/app/globals.css` files. Set up path aliases: `@/components` for components and `@/lib` for utils.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Verify that a `components.json` file is created in the project root and that `tailwind.config.ts` and `src/app/globals.css` have been updated with shadcn/ui's base configuration and CSS variables."
           },
           {
@@ -163,7 +163,7 @@
               "3.1"
             ],
             "details": "Run the command `npx shadcn-ui@latest add button card`. This will create the files `src/components/ui/button.tsx` and `src/components/ui/card.tsx`.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Check for the existence and content of `src/components/ui/button.tsx` and `src/components/ui/card.tsx` to ensure they were created correctly."
           },
           {
@@ -174,7 +174,7 @@
               "3.1"
             ],
             "details": "Create a new file at `src/components/layout/MainLayout.tsx`. The component should accept `children: React.ReactNode` as a prop. The root element should be a `<main>` tag with appropriate Tailwind classes for a full-height, centered layout, e.g., `className=\"flex min-h-screen flex-col items-center justify-center p-4 bg-background\"`.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "The component should render without errors and correctly pass through any child elements provided to it."
           },
           {
@@ -185,7 +185,7 @@
               "3.3"
             ],
             "details": "Open `src/app/page.tsx`. Import the `MainLayout` component from `_@/components/layout/MainLayout_`. Wrap the existing content of the page's return statement with the `<MainLayout>` component.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Run the development server (`npm run dev`) and navigate to the home page. The page should now have the basic background color and layout structure defined in `MainLayout`."
           },
           {
@@ -197,7 +197,7 @@
               "3.4"
             ],
             "details": "In `src/app/page.tsx`, import `Button` from `@/components/ui/button` and `Card`, `CardHeader`, `CardTitle`, `CardContent` from `@/components/ui/card`. Render a `<Card>` with a `<CardHeader>` and some text content, and also render a `<Button>`. Example: `<Button>Click me</Button>`.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Load the home page in a browser. Visually confirm that the Button and Card components are rendered with the default shadcn/ui styling, proving that the styles are being applied correctly through Tailwind CSS."
           }
         ]
@@ -212,7 +212,7 @@
         "dependencies": [
           3
         ],
-        "status": "pending",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -220,7 +220,7 @@
             "description": "Set up the file and routing structure for the new totem registration page within the Next.js App Router.",
             "dependencies": [],
             "details": "Create a new file at `src/app/totem/register/page.tsx`. This file will serve the `/totem/register` route. Add the `'use client';` directive at the top, as this page will contain interactive form elements. Create a basic React component shell for the registration page.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Run the development server and navigate to `http://localhost:3000/totem/register` to verify that the new page renders without errors."
           },
           {
@@ -231,7 +231,7 @@
               "4.1"
             ],
             "details": "In `src/app/totem/register/page.tsx`, import and use `Input`, `Label`, and `Button` from `src/components/ui`. Lay out a form with fields for 'Name', 'City', and 'State'. Use a simple, centered layout. The form should not be functional at this stage.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Visually inspect the `/totem/register` page to ensure the form fields and a submit button are rendered correctly."
           },
           {
@@ -242,7 +242,7 @@
               "4.2"
             ],
             "details": "Install and configure `react-hook-form` and `zod`. Create a `zod` schema to define validation rules: Name, City, and State must be non-empty strings. Connect the `Input` components to `react-hook-form` using its `register` function and display validation errors if a field is left blank.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Write a component test to verify that the form correctly identifies valid and invalid input based on the Zod schema. Manually test that error messages appear when submitting an empty form."
           },
           {
@@ -253,7 +253,7 @@
               "4.3"
             ],
             "details": "Create an `onSubmit` function that will be triggered by `react-hook-form`. This function should make a `POST` request to a new (to-be-created) API endpoint, `/api/participants`, sending the form data (name, city, state) as the JSON payload. Implement logic to handle the UI state during submission (e.g., disabling the button) and after (e.g., showing a success message and clearing the form).",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Use a tool like `msw` (Mock Service Worker) in tests to mock the `/api/participants` endpoint. Verify that a `POST` request is sent with the correct payload upon form submission. Manually test the end-to-end flow and check the browser's network tab."
           },
           {
@@ -264,7 +264,7 @@
               "4.2"
             ],
             "details": "Using Tailwind CSS utility classes, modify the components in `src/app/totem/register/page.tsx`. Increase the font size of `Label` and `Input` components (e.g., `text-2xl`). Set the `Button` size to `lg` and add significant padding (`p-8` or similar). Ensure the overall form container is centered and has large margins for a clean, focused appearance.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Use browser developer tools to simulate a touch device. Manually test the page by tapping on inputs and the button to ensure they are large and easy to interact with. Verify the layout looks clean on a large viewport."
           }
         ]
@@ -279,7 +279,7 @@
         "dependencies": [
           4
         ],
-        "status": "pending",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -287,7 +287,7 @@
             "description": "Add the `react-webcam` library to the project's dependencies. Create a new file for the webcam component, `src/components/custom/WebcamCapture.tsx`, and set up the basic component structure.",
             "dependencies": [],
             "details": "Run `npm install react-webcam` or the equivalent for your package manager. Create the file `src/components/custom/WebcamCapture.tsx` with a basic React functional component boilerplate. This component will eventually encapsulate all webcam-related logic.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Verify that the `react-webcam` package is listed in `package.json`. Ensure the new component file is created in the correct directory and can be imported without errors."
           },
           {
@@ -298,7 +298,7 @@
               "5.1"
             ],
             "details": "Import `Webcam` from `react-webcam`. Add it to the component's render output. Use a `videoConstraints` prop to set a desired aspect ratio (e.g., 1:1 for a square selfie). Implement basic error handling to display a message if the camera is not available or permission is denied.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Render the component on a test page. Confirm that the browser prompts for camera access. Verify that the live video feed is displayed correctly. Test the scenario where camera access is denied and ensure a fallback message is shown."
           },
           {
@@ -309,7 +309,7 @@
               "5.2"
             ],
             "details": "Use a `useRef` to get access to the `Webcam` component's methods. Create a state variable, e.g., `const [imageSrc, setImageSrc] = useState(null)`. The 'Take Picture' button's `onClick` handler will call the `getScreenshot()` method on the webcam ref and update the `imageSrc` state with the returned base64 string.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Click the 'Take Picture' button and use React DevTools to inspect the component's state, verifying that `imageSrc` is populated with a valid base64 string."
           },
           {
@@ -320,7 +320,7 @@
               "5.3"
             ],
             "details": "Use the `imageSrc` state to control the UI. When `imageSrc` is null, render the `<Webcam>` component and the 'Take Picture' button. When `imageSrc` has a value, render an `<img src={imageSrc} />` and a 'Retake' button. The 'Retake' button's `onClick` handler should reset the `imageSrc` state back to null.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Verify the initial state shows the live feed. After taking a picture, confirm the UI switches to show the static image and the 'Retake' button. Click 'Retake' and ensure the UI reverts to the live feed."
           },
           {
@@ -331,7 +331,7 @@
               "5.4"
             ],
             "details": "Modify the `WebcamCapture` component to accept an `onCapture` callback prop. When a picture is taken, call this function with the base64 image data. In the `TotemRegisterPage`, manage a state for the selfie and pass a handler function to the `WebcamCapture` component's `onCapture` prop to update this state. This ensures the image data is available for submission with the rest of the form.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "On the registration page, take a selfie. Use React DevTools to confirm that the parent page's state is updated with the base64 string. Ensure the rest of the form remains interactive."
           }
         ]
@@ -1015,7 +1015,7 @@
     ],
     "metadata": {
       "created": "2025-09-25T15:05:54.002Z",
-      "updated": "2025-09-25T15:22:35.105Z",
+      "updated": "2025-09-25T16:42:52.749Z",
       "description": "Tasks for master context"
     }
   }

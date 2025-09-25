@@ -1,0 +1,100 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// Core Models
+model Participant {
+  id        String   @id @default(cuid())
+  name      String
+  email     String?
+  phone     String?
+  selfieUrl String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  gameParticipants GameParticipant[]
+
+  @@map("participants")
+}
+
+model Game {
+  id        String      @id @default(cuid())
+  code      String      @unique
+  status    GameStatus  @default(WAITING)
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+
+  // Relations
+  participants GameParticipant[]
+  questions    Question[]
+
+  @@map("games")
+}
+
+model Question {
+  id                 String   @id @default(cuid())
+  text               String
+  options            String   // JSON array of options
+  correctAnswerIndex Int
+  imageUrl           String?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  // Relations
+  gameId String
+  game   Game     @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  answers Answer[]
+
+  @@map("questions")
+}
+
+// Join and Relational Models
+model GameParticipant {
+  id            String   @id @default(cuid())
+  score         Int      @default(0)
+  joinedAt      DateTime @default(now())
+  lastActiveAt  DateTime @default(now())
+
+  // Relations
+  gameId        String
+  game          Game       @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  participantId String
+  participant   Participant @relation(fields: [participantId], references: [id], onDelete: Cascade)
+  answers       Answer[]
+
+  @@unique([gameId, participantId])
+  @@map("game_participants")
+}
+
+model Answer {
+  id                 String   @id @default(cuid())
+  selectedOptionIndex Int
+  isCorrect          Boolean
+  answeredAt         DateTime @default(now())
+
+  // Relations
+  questionId         String
+  question           Question         @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  gameParticipantId  String
+  gameParticipant    GameParticipant  @relation(fields: [gameParticipantId], references: [id], onDelete: Cascade)
+
+  @@unique([questionId, gameParticipantId])
+  @@map("answers")
+}
+
+// Enums
+enum GameStatus {
+  WAITING
+  IN_PROGRESS
+  FINISHED
+  CANCELLED
+}
