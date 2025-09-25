@@ -1,0 +1,130 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&display=swap');
+
+:root {
+  /* Light mode colors */
+  --background: #ffffff;
+  --foreground: #0d1117;
+  --card: #ffffff;
+  --card-foreground: #0d1117;
+  --popover: #ffffff;
+  --popover-foreground: #0d1117;
+  --primary: #0d1117;
+  --primary-foreground: #ffffff;
+  --secondary: #f1f5f9;
+  --secondary-foreground: #0d1117;
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
+  --accent: #f1f5f9;
+  --accent-foreground: #0d1117;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: #e2e8f0;
+  --input: #e2e8f0;
+  --ring: #0d1117;
+  --radius: 0.5rem;
+}
+
+.dark {
+  /* Dark mode colors - Brutalist theme */
+  --background: #0d1117;
+  --foreground: #f0f6fc;
+  --card: #161b22;
+  --card-foreground: #f0f6fc;
+  --popover: #161b22;
+  --popover-foreground: #f0f6fc;
+  --primary: #f0f6fc;
+  --primary-foreground: #0d1117;
+  --secondary: #21262d;
+  --secondary-foreground: #f0f6fc;
+  --muted: #21262d;
+  --muted-foreground: #8b949e;
+  --accent: #21262d;
+  --accent-foreground: #f0f6fc;
+  --destructive: #f85149;
+  --destructive-foreground: #f0f6fc;
+  --border: #30363d;
+  --input: #30363d;
+  --ring: #f0f6fc;
+}
+
+* {
+  border-color: hsl(var(--border));
+}
+
+body {
+  @apply bg-background text-foreground font-body;
+  font-feature-settings: "rlig" 1, "calt" 1;
+}
+
+/* Brutalist utility classes */
+.brutal-border {
+  @apply border-2 border-foreground;
+}
+
+.brutal-shadow {
+  @apply shadow-brutal;
+}
+
+.brutal-button {
+  @apply px-6 py-3 font-bold text-lg border-2 border-foreground shadow-brutal-sm hover:shadow-brutal transition-all duration-200 active:translate-x-1 active:translate-y-1 active:shadow-none;
+}
+
+.brutal-card {
+  @apply p-6 border-2 border-foreground shadow-brutal bg-card;
+}
+
+.brutal-input {
+  @apply px-4 py-2 border-2 border-foreground shadow-brutal-sm focus:shadow-brutal focus:outline-none bg-background text-foreground;
+}
+
+/* Game-specific styles */
+.game-button {
+  @apply px-8 py-4 text-2xl font-bold border-4 border-foreground shadow-brutal hover:shadow-brutal-lg transition-all duration-200 active:translate-x-2 active:translate-y-2 active:shadow-none;
+}
+
+.game-button-a {
+  @apply bg-red-500 hover:bg-red-600 text-white;
+}
+
+.game-button-b {
+  @apply bg-blue-500 hover:bg-blue-600 text-white;
+}
+
+.game-button-c {
+  @apply bg-green-500 hover:bg-green-600 text-white;
+}
+
+/* Animations */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-in {
+  animation: slideIn 0.5s ease-out;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-muted;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-muted-foreground rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-foreground;
+}
