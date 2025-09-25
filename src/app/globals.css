@@ -362,6 +362,15 @@ body {
   width: 80% !important;
 }
 
+/* Admin styles */
+.totem-checkbox {
+  @apply border-2 border-foreground shadow-brutal;
+}
+
+.totem-badge {
+  @apply border-2 border-foreground shadow-brutal font-bold;
+}
+
 /* Countdown animation */
 @keyframes countdown-pulse {
   0%, 100% {

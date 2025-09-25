@@ -415,7 +415,7 @@
         "dependencies": [
           6
         ],
-        "status": "pending",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -423,7 +423,7 @@
             "description": "Create the new page route for the admin dashboard at `/admin`. This includes creating the `app/admin/page.tsx` file and setting up a basic page structure with a main heading like 'Participant Queue'.",
             "dependencies": [],
             "details": "Create a new directory `app/admin` and a `page.tsx` file inside it. The component should export a default function `AdminPage` that renders a main container with an `<h1>` or `<h2>` title. This sets up the foundational page for the dashboard.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Run the development server and navigate to `/admin` to ensure the page loads correctly and displays the title."
           },
           {
@@ -432,7 +432,7 @@
             "description": "Install the `swr` library and create a custom hook to fetch eligible participants. Define a TypeScript type for the participant data based on the database schema.",
             "dependencies": [],
             "details": "Run `npm install swr`. Create a new file for types, e.g., `src/lib/types.ts`, and define a `Participant` type matching the fields from `lib/db/schema.ts` (id, name, city, state, photoUrl, status). Create a custom hook, e.g., `useParticipantsQueue` in `src/hooks/use-participants.ts`, that uses SWR to fetch data from `/api/participants?status=eligible`. The hook should handle loading and error states.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Temporarily use the hook in the `AdminPage` component and log the output to the console to verify that data is being fetched correctly."
           },
           {
@@ -443,7 +443,7 @@
               "7.2"
             ],
             "details": "Create a new file `app/admin/columns.tsx`. Import `ColumnDef` from `tanstack/react-table` and the `Participant` type. Define and export a `columns` array. The columns should be: Photo (using `Avatar` component from `shadcn/ui`), Name, City, and State. The `accessorKey` for each column should match the property names from the `Participant` type.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "This is a definition file. Its correctness will be verified in the next subtask when it's used to render the table. A component test could be written to render a single row with mock data and columns."
           },
           {
@@ -454,7 +454,7 @@
               "7.3"
             ],
             "details": "Create a new component file, e.g., `app/admin/data-table.tsx`. This component will accept `columns` and `data` as props. It should use the `useReactTable` hook to initialize the table instance and render the `Table`, `TableHeader`, `TableRow`, `TableHead`, `TableBody`, and `TableCell` components from `shadcn/ui`. This follows the standard pattern for creating tables with `shadcn/ui`.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Create a Storybook story or a simple component test that passes mock columns and data to the `DataTable` to ensure it renders correctly."
           },
           {
@@ -467,7 +467,7 @@
               "7.4"
             ],
             "details": "In `app/admin/page.tsx`, call the `useParticipantsQueue` hook to get the participant data, loading, and error states. Conditionally render a loading indicator (e.g., `Skeleton` component) or an error message. If data is available, pass it and the `columns` definition from `app/admin/columns.tsx` to the `DataTable` component.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Manually test the entire flow. Register a new user via the totem UI and verify they appear in the admin queue automatically due to SWR's revalidation. Check that loading and empty states are handled correctly."
           }
         ]
@@ -1015,7 +1015,7 @@
     ],
     "metadata": {
       "created": "2025-09-25T15:05:54.002Z",
-      "updated": "2025-09-25T20:30:05.776Z",
+      "updated": "2025-09-25T20:36:29.057Z",
       "description": "Tasks for master context"
     }
   }
